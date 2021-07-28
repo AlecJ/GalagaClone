@@ -15,16 +15,22 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // Debug.Log("start");
+        Debug.Log("start");
     }
 
+    // Handles player movement
+    // this gets the intended movement from the input system
+    // actual movement updates are handled below in FixedUpdate()
     private void OnMove(InputValue movementValue)
     {
+        Debug.Log("input");
         Vector2 movementVector = movementValue.Get<Vector2>();
         
         // store X and Y vector components
         movementX = movementVector.x;
         movementY = movementVector.y;
+
+        Debug.Log("(Input) X: " + movementX + " Y: " + movementY);
     }
 
     // Update before physics are applied
@@ -33,4 +39,9 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
     }
+
+    // // Handles contact with any triggers
+    // private void OnTriggerEnter(Collider other) {
+
+    // }
 }
